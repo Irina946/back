@@ -1,0 +1,27 @@
+import { TUserSchema, UserModel } from "./user.model";
+
+export async function createUser(user: TUserSchema): Promise<boolean> {
+    const isUserExist = (await readUserByEmail(user.email)) !== null;
+    if (isUserExist) {
+        return false;
+    }
+
+    const Users = new UserModel(user);
+    await Users.save();
+    return true
+    
+}
+
+export async function readUserByEmail(email: string): Promise<TUserSchema | null> {
+    const users = await UserModel.find({ email });
+    return users[0] ?? null;
+}
+
+
+export async function deleteUserByEmail(email: string) {
+    await UserModel.deleteOne({ email });
+}
+
+export async function updateUserByEmail(email: string, newFields: Partial<TUserSchema>) {
+    await UserModel.updateOne({email}, newFields)
+}
