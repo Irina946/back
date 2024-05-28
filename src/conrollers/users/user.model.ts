@@ -1,5 +1,5 @@
 
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 
 export type TUserSchema = {
     passwordHash: string,
@@ -35,4 +35,4 @@ const userSchema = new Schema<TUserSchema>({
     picturesBase64: [String]
 });
 
-export const UserModel = mongoose.model<TUserSchema>('User', userSchema);
+export const UserModel = model<TUserSchema>('User', userSchema);
