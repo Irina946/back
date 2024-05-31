@@ -7,6 +7,7 @@ export async function createUser(user: TUserSchema): Promise<boolean> {
     }
 
     const users = new UserModel(user);
+    console.log(user)
     await users.save();
     return true
     

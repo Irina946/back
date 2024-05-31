@@ -24,7 +24,7 @@ export function initUsersController(server: Express) {
     }
   });
 
-  server.post('/api/createUser', async (req, res) => {
+  server.post('/api/createUser', async (req, res, next) => {
     try {
       const isCreateSucces = await createUser(req.body)
       if (!isCreateSucces) {
@@ -81,3 +81,5 @@ export function initUsersController(server: Express) {
   });
 
 }
+
+

@@ -4,11 +4,12 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { createUser, deleteUserByEmail, readUserByEmail, updateUserByEmail } from './conrollers/users/user.service';
 import { initUsersController } from './conrollers/users/users.controller';
+import cors from 'cors';
 
 const server = express();
 
 const isDev = true;
-
+server.use(cors())
 server.use(bodyParser.json());
 
 if (isDev) {
