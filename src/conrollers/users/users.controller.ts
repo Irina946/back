@@ -2,7 +2,7 @@ import type { Express } from 'express';
 import mongoose, { mongo } from 'mongoose';
 import * as path from 'node:path';
 import fs from 'fs';
-import { createUser, deleteUserByEmail, readUserByEmail, updateUserByEmail } from './user.service';
+import { createUser, deleteUserByEmail, readAllUser, readUserByEmail, updateUserByEmail } from './user.service';
 
 export function initUsersController(server: Express) {
   server.post('/api/user', async (req, res) => {
@@ -80,6 +80,22 @@ export function initUsersController(server: Express) {
     }
   });
 
+  server.post('/api/userAll', async (req, res) => {
+    try {
+      // Поиск всех пользователей
+      const userFromBd = await readAllUser()
+
+
+      if (userFromBd != null) {
+        return res.json(userFromBd);
+      }
+
+      return res.status(403).json({ message: 'User not found' });
+    } catch (e) {
+      console.log(e);
+      return res.status(500).json({ message: e.message });
+    }
+  });
 }
 
 

@@ -1,6 +1,7 @@
 
 import mongoose, { Schema, model } from 'mongoose';
 
+
 export type TUserSchema = {
     passwordHash: string,
     photoBase64: string,

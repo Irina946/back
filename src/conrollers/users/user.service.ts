@@ -26,3 +26,8 @@ export async function deleteUserByEmail(email: string) {
 export async function updateUserByEmail(email: string, newFields: Partial<TUserSchema>) {
     await UserModel.updateOne({email}, newFields)
 }
+
+export async function readAllUser(): Promise<TUserSchema[] | null> {
+    const users = await UserModel.find({})
+    return users ?? null
+}
