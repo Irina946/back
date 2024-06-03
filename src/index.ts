@@ -34,7 +34,7 @@ const DB_PASS = 'user1user1'
 
 const url = util.format('mongodb://%s:%s@%s/', DB_USER, DB_PASS, DB_HOSTS.join(','))
 
-const DBurl = 'mongodb://user:user1user1@rc1a-seq8vignz5jes2n9.mdb.yandexcloud.net:27018/db1'
+const DBurl = 'mongodb://user:user1user1@rc1a-seq8vignz5jes2n9.mdb.yandexcloud.net:27018/test'
 
 const options = {
   useNewUrlParser: true,
