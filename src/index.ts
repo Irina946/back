@@ -22,45 +22,25 @@ if (isDev) {
   });
 }
 
+const CACERT = '/home/user/.mongodb/root.crt'
+const DBurl = 'mongodb://user:user1user1@rc1a-seq8vignz5jes2n9.mdb.yandexcloud.net:27018/db1'
+
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  tls: true,
+  tlsCAFile: CACERT,
+}
+
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/test');
+  await mongoose.connect(DBurl, options);
   server.listen(3010, () => {
     console.log('server is running on 3010 port');
   });
   initUsersController(server);
-
-  // await createUser({
-    // passwordHash: 'jvlqqowdiornfovm',
-    // photoBase64: 'getImageData()',
-    // coverBase64: 'ImageData()',
-    // name: 'Ivan Ivanov',
-    // email: 'mail@mail.com',
-    // location: 'Moscow',
-    // dateBirthday: '22.05.1998',
-    // activity: ['Model', 'Photo'],
-    // specialization: ['Stret', 'children', 'food'],
-    // price: 5000,
-    // sex: 'man',
-    // experience: '1-3',
-    // aboutMe: 'My name is....',
-    // picturesBase64: ['number1']
-  // })
-
-  // await deleteUserByEmail('mail@mail.com')
-  await updateUserByEmail('mail@mail.com', {name: 'Base'})
-
-  // console.log(await readUserByEmail('mail@mail.com'))
 };
 
 
 // запуск сервера
 void main()
 
-
-
-function logAction(action: string, data: object): void {
-  console.log('––––––======––––––');
-  console.log(`${action}:`);
-  console.log(data);
-  console.log('––––––======––––––');
-}
