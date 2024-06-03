@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import { createUser, deleteUserByEmail, readUserByEmail, updateUserByEmail } from './conrollers/users/user.service';
 import { initUsersController } from './conrollers/users/users.controller';
 import cors from 'cors';
+import util from 'util'
 
 const server = express();
 
@@ -23,6 +24,16 @@ if (isDev) {
 }
 
 const CACERT = '/home/user/.mongodb/root.crt'
+const DB_HOSTS = [
+  'rc1a-seq8vignz5jes2n9.mdb.yandexcloud.net:27018'
+]
+
+const DB_USER = 'user1'
+const DB_PASS = 'user1user1'
+
+
+const url = util.format('mongodb://%s:%s@%s/', DB_USER, DB_PASS, DB_HOSTS.join(','))
+
 const DBurl = 'mongodb://user:user1user1@rc1a-seq8vignz5jes2n9.mdb.yandexcloud.net:27018/db1'
 
 const options = {
@@ -30,10 +41,11 @@ const options = {
   useUnifiedTopology: true,
   tls: true,
   tlsCAFile: CACERT,
+  authSource: 'db1'
 }
 
 async function main() {
-  await mongoose.connect(DBurl, options);
+  await mongoose.connect(url, options);
   server.listen(3010, () => {
     console.log('server is running on 3010 port');
   });
