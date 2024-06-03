@@ -41,7 +41,7 @@ const options = {
   useUnifiedTopology: true,
   tls: true,
   tlsCAFile: CACERT,
-  authSource: 'db1'
+  authSource: 'test'
 }
 
 async function main() {
